@@ -2,7 +2,10 @@ export type Player = {
   id: string;
   socketId: string;
   name: string;
+  color: string;
+  isHost: boolean;
   isEliminated: boolean;
+  isReady: boolean;
 };
 
 export type Room = {

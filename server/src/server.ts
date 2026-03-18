@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import http from "http";
 import { Server } from "socket.io";
+import { initSocket } from "./config/socket";
 
 const app = express();
 
@@ -14,6 +15,8 @@ const io = new Server(server, {
     origin: "*",
   },
 });
+
+initSocket(io);
 
 const PORT = 4000;
 
