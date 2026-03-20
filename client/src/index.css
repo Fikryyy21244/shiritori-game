@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "samurai-blast";
+    src: url("/fonts/SamuraiBlast.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "japanese-design";
+    src: url("/fonts/japanese-design.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-samurai-blast: "samurai-blast", sans-serif;
+    --font-iosevka: "Iosevka Charon Mono", monospace;
+
+    /* font japanese*/
+    --font-rampart: "Rampart One", sans-serif;
+    --font-mochiy: "Mochiy Pop One", sans-serif;
+    --font-japanese-design: "japanese-design", sans-serif;
+
+    /*color*/
+    --color-red-dark: #ca3c25;
+}
+
+body {
+    font-family: var(--font-iosevka);
+    background-color: #fffbbd;
+}
+
+section {
+    padding: 7% 0;
+}
