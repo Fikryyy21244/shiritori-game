@@ -8,11 +8,13 @@ const buttons = [
     text: "Single Player",
     bgColor: "bg-red-300",
     textColor: "",
+    path: "/play/single",
   },
   {
     text: "Multi Player",
     bgColor: "bg-amber-300",
-    textColor: "",
+    textColor: "/play/multiplayer",
+    path: "/play/multiplayer",
   },
 ];
 
@@ -26,7 +28,13 @@ export default function LandingPage() {
         <div className="mb-4">
           <div className="grid grid-cols-2 gap-2">
             {buttons.map((b) => {
-              return <LandingButton text={b.text} bgColor={b.bgColor} />;
+              return (
+                <LandingButton
+                  text={b.text}
+                  bgColor={b.bgColor}
+                  path={b.path}
+                />
+              );
             })}
           </div>
         </div>
