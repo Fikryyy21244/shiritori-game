@@ -34,6 +34,16 @@ export default function SoloGameSession() {
   useEffect(() => {
     if (!isGameStart) return;
 
+    const resetGame = () => {
+      setCountStart(3);
+      setIsCountdownDone(false);
+      setScore(0);
+      setTimeLeft(30);
+      setIsGameOver(false);
+      setUsedWords([]);
+      setInputValue("");
+    };
+
     // START GAME
     const startGame = () => {
       const filteredWords = wordsData.filter((item) => {
@@ -59,6 +69,7 @@ export default function SoloGameSession() {
           clearInterval(startTimer);
 
           setTimeout(() => {
+            resetGame();
             setIsCountdownDone(true);
             startGame();
           }, 500);
