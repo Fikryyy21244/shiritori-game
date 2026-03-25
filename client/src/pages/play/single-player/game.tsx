@@ -5,11 +5,14 @@ import TimerBar from "../../../components/common/TimerBar";
 import wordsData from "../../../data/jlpt_vocab.json";
 import GameOverModal from "../../../components/game/GameOverModal";
 import * as wanakana from "wanakana";
+import { useAlert } from "../../../hooks/useAlert";
+import AlertInGame from "../../../components/common/AlertInGame";
 
 export default function SoloGameSession() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isGameStart } = location.state || {};
+  const { alertState, showAlert } = useAlert();
 
   const [countStart, setCountStart] = useState(3);
   const [isCountdownDone, setIsCountdownDone] = useState(false);
@@ -100,7 +103,7 @@ export default function SoloGameSession() {
     const lastChar = normalizedCurrent.slice(-1);
 
     if (firstChar !== lastChar) {
-      alert(`Harus dimulai dengan "${lastChar}"`);
+      showAlert(`Harus dimulai dengan "${lastChar}"`, "error");
       return;
     }
 
@@ -109,19 +112,19 @@ export default function SoloGameSession() {
     );
 
     if (!isValid) {
-      alert("Kata tidak ditemukan!");
+      showAlert("Kata tidak ditemukan!", "info");
       return;
     }
 
     if (usedWords.includes(normalizedInput)) {
-      alert("Kata sudah dipakai!");
+      showAlert("Kata sudah dipakai!", "warning");
       return;
     }
 
     if (normalizedInput.endsWith("ん")) {
       setScore((prev) => prev + 10);
       setIsGameOver(true);
-      alert("Game Over! Kata berakhir dengan ん");
+      showAlert("Game Over! Kata berakhir dengan ん");
       return;
     }
 
@@ -153,6 +156,12 @@ export default function SoloGameSession() {
       {isGameStart && !isCountdownDone && <CountStartGame count={countStart} />}
 
       {isGameOver && <GameOverModal />}
+
+      <AlertInGame
+        message={alertState.message}
+        type={alertState.type}
+        isVisible={alertState.isVisible}
+      />
 
       {isCountdownDone && (
         <div className="flex flex-col">
